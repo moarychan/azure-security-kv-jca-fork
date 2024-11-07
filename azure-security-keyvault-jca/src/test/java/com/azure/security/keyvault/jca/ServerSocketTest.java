@@ -66,6 +66,7 @@ public class ServerSocketTest {
         certificateName = PropertyConvertorUtils.getPropertyValue("AZURE_KEYVAULT_CERTIFICATE_NAME");
     }
 
+
     private void startSocket(SSLServerSocket serverSocket) {
         Thread server = new Thread(() -> {
             while (true) {
@@ -85,7 +86,8 @@ public class ServerSocketTest {
 
     @Test
     public void testHttpsConnectionWithoutClientTrust() throws Exception {
-        SSLContext sslContext = SSLContexts.custom()
+        SSLContext sslContext = SSLContexts
+            .custom()
             .loadTrustMaterial((final X509Certificate[] chain, final String authType) -> true)
             .build();
         testHttpsConnection(8765, sslContext);
@@ -94,7 +96,10 @@ public class ServerSocketTest {
 
     @Test
     public void testHttpsConnectionWithSelfSignedClientTrust() throws Exception {
-        SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(ks, new TrustSelfSignedStrategy()).build();
+        SSLContext sslContext = SSLContexts
+            .custom()
+            .loadTrustMaterial(ks, new TrustSelfSignedStrategy())
+            .build();
         testHttpsConnection(8766, sslContext);
 
     }
@@ -103,6 +108,7 @@ public class ServerSocketTest {
     public void testServerSocketWithDefaultTrustManager() throws Exception {
         serverSocketWithTrustManager(8768);
     }
+
 
     /**
      * Test SSLServerSocket with key vault trust manager.
@@ -115,6 +121,7 @@ public class ServerSocketTest {
         Security.addProvider(provider);
         serverSocketWithTrustManager(8767);
     }
+
 
     private void testHttpsConnection(Integer port, SSLContext sslContext) throws Exception {
         /*
@@ -169,7 +176,8 @@ public class ServerSocketTest {
          * - Set SSL context to trust any certificate.
          */
 
-        SSLContext sslContext = SSLContexts.custom()
+        SSLContext sslContext = SSLContexts
+            .custom()
             .loadTrustMaterial(ks, new TrustSelfSignedStrategy())
             .loadKeyMaterial(ks, "".toCharArray(), new ClientPrivateKeyStrategy())
             .build();
@@ -191,11 +199,14 @@ public class ServerSocketTest {
          * - Create SSL connection factory.
          * - Set hostname verifier to trust any hostname.
          */
-        SSLConnectionSocketFactory sslConnectionSocketFactory
-            = new SSLConnectionSocketFactory(sslContext, (hostname, session) -> true);
+        SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(
+            sslContext, (hostname, session) -> true);
 
         PoolingHttpClientConnectionManager manager = new PoolingHttpClientConnectionManager(
-            RegistryBuilder.<ConnectionSocketFactory>create().register("https", sslConnectionSocketFactory).build());
+            RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("https", sslConnectionSocketFactory)
+                .build());
+
 
         String result = null;
 
@@ -215,6 +226,7 @@ public class ServerSocketTest {
         }
         return result;
     }
+
 
     private static class ClientPrivateKeyStrategy implements PrivateKeyStrategy {
         @Override

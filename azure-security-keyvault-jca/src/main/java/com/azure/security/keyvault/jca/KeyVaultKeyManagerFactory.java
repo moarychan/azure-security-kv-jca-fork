@@ -36,7 +36,11 @@ public final class KeyVaultKeyManagerFactory extends KeyManagerFactorySpi {
      */
     @Override
     protected void engineInit(KeyStore keystore, char[] password) {
-        LOGGER.entering("KeyVaultKeyManagerFactory", "engineInit", new Object[] { keystore, password });
+        LOGGER.entering(
+            "KeyVaultKeyManagerFactory",
+            "engineInit",
+            new Object[] { keystore, password }
+        );
         KeyVaultKeyManager manager = new KeyVaultKeyManager(keystore, password);
         keyManagers.add(manager);
     }
