@@ -50,13 +50,14 @@ add the direct dependency to your project as follows.
 <dependency>
     <groupId>com.azure</groupId>
     <artifactId>azure-security-keyvault-jca</artifactId>
-    <version>2.7.0</version>
+    <version>2.9.0</version>
 </dependency>
 ```
 [//]: # ({x-version-update-end})
 
 ### Prerequisites
 - A [Java Development Kit (JDK)][jdk_link], version 8 or later.
+  - Here are details about [Java 8 client compatibility with Azure Certificate Authority](https://learn.microsoft.com/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list#client-compatibility-for-public-pkis).
 - [Azure Subscription][azure_subscription]
 - An existing [Azure Key Vault][azure_keyvault]. If you need to create a Key Vault, you can use the [Azure Cloud Shell][azure_cloud_shell] to create one with this Azure CLI command. Replace `<your-resource-group-name>` and `<your-key-vault-name>` with your own, unique names:
 
@@ -167,6 +168,13 @@ Please replace `${KEY_VAULT}` with your key vault name and replace `${MANAGED_ID
 | PKCS #12     | EC       | P-384                           | SHA384withECDSA | ✔       |
 | PKCS #12     | EC       | P-521                           | SHA512withECDSA | ✔       |
 | PKCS #12     | EC       | P-256K                          |                 | ✘       |
+| PKCS #12     | RSA-HSM  | 2048                            | RSASSA-PSS      | ✔       |     
+| PKCS #12     | RSA-HSM  | 3072                            | RSASSA-PSS      | ✔       |
+| PKCS #12     | RSA-HSM  | 4096                            | RSASSA-PSS      | ✔       |
+| PKCS #12     | EC-HSM   | P-256                           | SHA256withECDSA | ✔       |
+| PKCS #12     | EC-HSM   | P-384                           | SHA384withECDSA | ✔       |
+| PKCS #12     | EC-HSM   | P-521                           | SHA512withECDSA | ✔       |
+| PKCS #12     | EC-HSM   | P-256K                          |                 | ✘       |
 | PEM          | RSA      | 2048                            | RSASSA-PSS      | ✔       |
 | PEM          | RSA      | 3072                            | RSASSA-PSS      | ✔       |
 | PEM          | RSA      | 4096                            | RSASSA-PSS      | ✔       |
@@ -174,6 +182,13 @@ Please replace `${KEY_VAULT}` with your key vault name and replace `${MANAGED_ID
 | PEM          | EC       | P-384                           | SHA384withECDSA | ✔       |
 | PEM          | EC       | P-521                           | SHA512withECDSA | ✔       | 
 | PEM          | EC       | P-256K                          |                 | ✘       |
+| PEM          | RSA-HSM  | 2048                            | RSASSA-PSS      | ✔       |
+| PEM          | RSA-HSM  | 3072                            | RSASSA-PSS      | ✔       |
+| PEM          | RSA-HSM  | 4096                            | RSASSA-PSS      | ✔       |
+| PEM          | EC-HSM   | P-256                           | SHA256withECDSA | ✔       |
+| PEM          | EC-HSM   | P-384                           | SHA384withECDSA | ✔       |
+| PEM          | EC-HSM   | P-521                           | SHA512withECDSA | ✔       | 
+| PEM          | EC-HSM   | P-256K                          |                 | ✘       |
 
 ## Troubleshooting
 
