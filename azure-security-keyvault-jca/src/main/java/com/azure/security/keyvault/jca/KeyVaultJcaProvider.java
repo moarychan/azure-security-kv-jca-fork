@@ -51,6 +51,7 @@ public final class KeyVaultJcaProvider extends Provider {
     public KeyVaultJcaProvider() {
         super(PROVIDER_NAME, VERSION, INFO);
         initialize();
+        System.out.println("Create KeyVaultJcaProvider instance. *****");
     }
 
     /**

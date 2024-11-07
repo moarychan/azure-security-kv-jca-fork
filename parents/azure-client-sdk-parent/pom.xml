@@ -1060,38 +1060,6 @@
             <skip>${shade.skip}</skip>
           </configuration>
         </plugin>
-
-        <!-- This plugin formats source code. -->
-        <plugin>
-          <groupId>com.diffplug.spotless</groupId>
-          <artifactId>spotless-maven-plugin</artifactId>
-          <version>2.30.0</version> <!-- {x-version-update;com.diffplug.spotless:spotless-maven-plugin;external_dependency} -->
-          <configuration>
-            <skip>${spotless.skip}</skip>
-            <java>
-              <eclipse>
-                <version>4.21.0</version> <!-- 4.21.0 is the last version of the Eclipse formatter supporting Java 8. -->
-                <file>${project.basedir}/${relative.path.to.eng.folder}/.vscode/eclipse-format-azure-sdk-for-java.xml</file>
-              </eclipse>
-            </java>
-          </configuration>
-          <executions>
-            <execution>
-              <id>spotless-apply</id>
-              <goals>
-                <goal>apply</goal>
-              </goals>
-              <phase>process-sources</phase>
-            </execution>
-            <execution>
-              <id>spotless-check</id>
-              <goals>
-                <goal>check</goal>
-              </goals>
-              <phase>verify</phase>
-            </execution>
-          </executions>
-        </plugin>
       </plugins>
     </pluginManagement>
   </build>
