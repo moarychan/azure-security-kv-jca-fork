@@ -29,27 +29,31 @@
 //        KeyVaultClient keyVaultClient = new KeyVaultClient(keyVaultUrl, tenantId, clientId, clientSecret);
 //
 //        try {
-//            signJar(keyVaultClient, "my-cert");
+//            signJar(keyVaultClient,
+////                "leaf-bundle2" //engineInitSign() not supported which private key is not instance of KeyVaultPrivateKey
+//                "1105-no-integrated-ca-no-expoertable-key-all-2048"
+////                "self-signed"
+//            );
 //        } catch (NoSuchAlgorithmException e) {
 //            throw new RuntimeException(e);
 //        }
-//
 //    }
 //
 //    private static void signJar(KeyVaultClient keyVaultClient, String alias) throws NoSuchAlgorithmException {
 //        Key privateKey = keyVaultClient.getKey(alias, null);
-//        Certificate certificate = keyVaultClient.getCertificate(alias);
+////        Certificate certificate = keyVaultClient.getCertificate(alias);
+//        Certificate [] certificates = keyVaultClient.getCertificateChain(alias);
 //
 //        System.out.println(String.format("Alg for private key of %s is %s", alias, privateKey.getAlgorithm()));
-//        System.out.println(String.format("Alg for public key of %s is %s.", alias, certificate.getPublicKey().getAlgorithm()));
+//        System.out.println(String.format("Alg for public key of %s is %s.", alias, certificates[0].getPublicKey().getAlgorithm()));
 //
 //        JarSigner jarSigner = new JarSigner
-//            .Builder(new KeyStore.PrivateKeyEntry((PrivateKey) privateKey, new Certificate[]{certificate}))
-//            .signatureAlgorithm("SHA512withRSA", new KeyVaultSigProvider())
+//            .Builder(new KeyStore.PrivateKeyEntry((PrivateKey) privateKey, certificates))
+//            .signatureAlgorithm("SHA512withRSA", new KeyVaultJcaProvider())
 //            .build();
 //
-//        String inputFilePath = "";
-//        String outputFilePath = "";
+//        String inputFilePath = "D:\\java\\spring-cloud-azure-keyvault\\jca\\2024\\list-all-bouncycastle-classe-to-shade\\files\\demo-jar-signer-0.0.1-SNAPSHOT.jar";
+//        String outputFilePath = "D:\\java\\spring-cloud-azure-keyvault\\jca\\2024\\list-all-bouncycastle-classe-to-shade\\files\\signerjar.jar";
 //
 //        try (ZipFile in = new ZipFile(inputFilePath);
 //             FileOutputStream out = new FileOutputStream(outputFilePath)) {

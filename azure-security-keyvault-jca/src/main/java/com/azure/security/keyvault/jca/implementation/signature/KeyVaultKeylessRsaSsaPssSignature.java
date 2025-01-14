@@ -8,7 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.PSSParameterSpec;
-import java.util.Base64;
 
 /**
  * key vault Rsa signature to support key less
@@ -24,8 +23,7 @@ public class KeyVaultKeylessRsaSsaPssSignature extends KeyVaultKeylessRsaSignatu
     }
 
     @Override
-    protected void engineSetParameter(AlgorithmParameterSpec params)
-        throws InvalidAlgorithmParameterException {
+    protected void engineSetParameter(AlgorithmParameterSpec params) throws InvalidAlgorithmParameterException {
         if (params == null) {
             throw new InvalidAlgorithmParameterException("Parameters cannot be null");
         }
